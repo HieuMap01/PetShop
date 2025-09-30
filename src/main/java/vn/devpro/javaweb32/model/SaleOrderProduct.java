@@ -22,7 +22,7 @@ public class SaleOrderProduct extends BaseModel {
 	@Column(name = "description", length = 500, nullable = true)
 	private String description;
 
-	@Column(name = "product_name", length = 300, nullable = true)
+	@Column(name = "name", length = 300, nullable = true)
 	private String name;
 
 	// Mapping many-to-one: tbl_sale_order_product-to-tbl_product

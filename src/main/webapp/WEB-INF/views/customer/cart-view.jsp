@@ -102,9 +102,9 @@
 																				</span>
 																			</td>
 																			<td align="center"><a
-																				href="${classpath }/product/${cartProduct.id }"
+																				href="${env }/product/${cartProduct.id }"
 																				role="button" class="btn btn-secondary">Edit</a> <a
-																				href="${classpath }/product-cart-delete/${cartProduct.id }"
+																				href="${env }/product-cart-delete/${cartProduct.id }"
 																				role="button" class="btn btn-secondary">Delete</a>
 																		</tr>
 																	</c:forEach>

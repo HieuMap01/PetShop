@@ -35,6 +35,14 @@ public class SaleOrder extends BaseModel {
 	@Column(name = "customer_address", length = 300, nullable = true)
 	private String customerAddress;
 
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "create_by", referencedColumnName = "id")
+	private User userCreateSaleOrder;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "update_by", referencedColumnName = "id")
+	private User userUpdateSaleOrder;
+
 	// Mapping one-to-many: tbl_sale_order-to-tbl_sale_order_product
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "saleOrder")
 	private List<SaleOrderProduct> saleOrderProducts = new ArrayList<SaleOrderProduct>();
@@ -62,7 +70,7 @@ public class SaleOrder extends BaseModel {
 
 	public SaleOrder(Integer id, Date createDate, Date updateDate, Boolean status, String code, BigDecimal total,
 			String customerName, String customerMobile, String customerEmail, String customerAddress,
-			List<SaleOrderProduct> saleOrderProducts, User user) {
+			User userCreateSaleOrder, User userUpdateSaleOrder, List<SaleOrderProduct> saleOrderProducts, User user) {
 		super(id, createDate, updateDate, status);
 		this.code = code;
 		this.total = total;
@@ -70,8 +78,26 @@ public class SaleOrder extends BaseModel {
 		this.customerMobile = customerMobile;
 		this.customerEmail = customerEmail;
 		this.customerAddress = customerAddress;
+		this.userCreateSaleOrder = userCreateSaleOrder;
+		this.userUpdateSaleOrder = userUpdateSaleOrder;
 		this.saleOrderProducts = saleOrderProducts;
 		this.user = user;
+	}
+
+	public User getUserCreateSaleOrder() {
+		return userCreateSaleOrder;
+	}
+
+	public void setUserCreateSaleOrder(User userCreateSaleOrder) {
+		this.userCreateSaleOrder = userCreateSaleOrder;
+	}
+
+	public User getUserUpdateSaleOrder() {
+		return userUpdateSaleOrder;
+	}
+
+	public void setUserUpdateSaleOrder(User userUpdateSaleOrder) {
+		this.userUpdateSaleOrder = userUpdateSaleOrder;
 	}
 
 	public String getCode() {

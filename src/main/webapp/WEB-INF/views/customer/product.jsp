@@ -122,7 +122,7 @@
                                             </div>
                                             <div class="product__cart-button">
                                                 <div class="add__to__cart">
-                                                    <a class="add-cart-link" onclick="addToCart(${product.id },'${product.name }')">Add to cart</a>
+                                                    <a class="add-cart-link" onclick="addToCart(${product.id }, ${product.price } ,'${product.name }', '${product.avatar }')">Add to cart</a>
                                                 </div>
                                                 <a href="#" class="add-cart-heart">
                                                     <i class='bx bx-heart'></i>
@@ -410,12 +410,14 @@
 
 	<!-- Add to cart -->
 	<script type="text/javascript">
-		addToCart = function(_productId, _productName) {		
+		addToCart = function(_productId, _productPrice, _productName, _productAvatar) {		
 			alert("Thêm "  + jQuery("#quantity").val() + " sản phẩm '" + _productName + "' vào giỏ hàng ");
 			let data = {
 				id: _productId, //lay theo id
+				price: _productPrice,
 				quantity: jQuery("#quantity").val(),
 				name: _productName,
+				avatar: _productAvatar,
 			};
 				
 			//$ === jQuery

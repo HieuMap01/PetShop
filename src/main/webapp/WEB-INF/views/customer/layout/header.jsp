@@ -92,7 +92,7 @@
 						<div class=" header__bottom-btn header__bottom-cart">
 							<a href="${env }/cart"><i class='bx bx-cart'></i></a> 
 							<span
-								class="header__bottom-num" id="totalCartProducts">0</span>
+								class="header__bottom-num" id="totalCartProducts">${totalCartProducts }</span>
 							<div class="header__box-cart">
 								<div class="header__bottom-box-cart">
 									<div class="header__cart-products">
