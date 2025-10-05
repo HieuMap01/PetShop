@@ -86,7 +86,7 @@
 							</div>
 						</div>
 						<div class=" header__bottom-btn header__bottom-user">
-							<a href="${env }/customer/pages/login/login.html"><i
+							<a href="${env }/login"><i
 								class='bx bx-user'></i></a>
 						</div>
 						<div class=" header__bottom-btn header__bottom-cart">

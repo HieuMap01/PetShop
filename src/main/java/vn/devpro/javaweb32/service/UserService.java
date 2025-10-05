@@ -24,4 +24,5 @@ public class UserService extends BaseService<User> {
 				+ "tbl_role r WHERE u.id=ur.user_id AND ur.role_id = r.id AND r.name='ADMIN'";
 		return super.excuteNativeSql(sql);
 	}
+
 }

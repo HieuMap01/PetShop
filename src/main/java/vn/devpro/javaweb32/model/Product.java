@@ -63,7 +63,7 @@ public class Product extends BaseModel {
 	}
 
 	// ---------------- Mapping many-to-one:
-	// category-to-user-create--------------------------------
+	// product-to-user-create--------------------------------
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "create_by", referencedColumnName = "id")
 	private User userCreateProduct;

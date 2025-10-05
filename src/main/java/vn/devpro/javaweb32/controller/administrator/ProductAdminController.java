@@ -187,10 +187,10 @@ public class ProductAdminController extends BaseController implements Jw32Contan
 		if (isUploadImages(imageFiles)) { // có upload danh sách ảnh
 			for (MultipartFile image : imageFiles) {
 				if (isUploadFile(image)) { // có upload file
-					String paths = FOLDER_UPLOAD + "Product/Image" + image.getOriginalFilename();
+					String paths = FOLDER_UPLOAD + "Product/Image/" + image.getOriginalFilename();
 
 					File file = new File(paths);
-					avatarFile.transferTo(file);
+					image.transferTo(file);
 
 					// lưu đường dẫn vào db(product table)
 					ProductImage pImage = new ProductImage();
@@ -261,15 +261,15 @@ public class ProductAdminController extends BaseController implements Jw32Contan
 		if (isUploadImages(imageFiles)) { // có upload danh sách ảnh
 			for (MultipartFile image : imageFiles) {
 				if (isUploadFile(image)) { // có upload file
-					String paths = FOLDER_UPLOAD + "Product/Image" + image.getOriginalFilename();
+					String paths = FOLDER_UPLOAD + "Product/Image/" + image.getOriginalFilename();
 
 					File file = new File(paths);
-					avatarFile.transferTo(file);
+					image.transferTo(file);
 
 					// lưu đường dẫn vào db(product table)
 					ProductImage pImage = new ProductImage();
 					pImage.setCreateDate(new Date());
-					pImage.setPath("Product/Image" + image.getOriginalFilename());
+					pImage.setPath("Product/Image/" + image.getOriginalFilename());
 					pImage.setStatus(Boolean.TRUE);
 					pImage.setTitle(image.getOriginalFilename());
 

@@ -5,11 +5,14 @@ import java.math.BigInteger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import vn.devpro.javaweb32.dto.Cart;
 import vn.devpro.javaweb32.dto.CartProduct;
+import vn.devpro.javaweb32.model.User;
 
 @Controller
 public class BaseController {
@@ -34,5 +37,29 @@ public class BaseController {
 	@ModelAttribute("title")
 	public String title() {
 		return "JavaWeb 32";
+	}
+
+	// Lay thong tin cua user dang nhap
+	@ModelAttribute("loginedUser")
+	public User getLoginedUser() {
+
+		Object loginedUser = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+		if (loginedUser != null && loginedUser instanceof UserDetails) {
+			User user = (User) loginedUser;
+			return user;
+		}
+		return new User();
+	}
+
+	// Kiem tra da login hay chua?
+	@ModelAttribute("isLogined")
+	public boolean isLogined() {
+		Object loginedUser = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+		if (loginedUser != null && loginedUser instanceof UserDetails) {
+			return true;
+		}
+		return false;
 	}
 }

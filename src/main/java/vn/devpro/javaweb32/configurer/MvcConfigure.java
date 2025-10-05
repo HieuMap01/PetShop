@@ -1,4 +1,4 @@
-package vn.devpro.javaweb32.configure;
+package vn.devpro.javaweb32.configurer;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

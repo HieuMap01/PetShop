@@ -13,54 +13,52 @@ import org.springframework.stereotype.Service;
 import vn.devpro.javaweb32.model.BaseModel;
 
 @Service
-public abstract class BaseService <Model extends BaseModel> {
-	
+public abstract class BaseService<Model extends BaseModel> {
+
 	@PersistenceContext
 	EntityManager entityManager;
-	
+
 	public abstract Class<Model> clazz();
-	
-	//Lay mot ban ghi theo id
+
+	// Lay mot ban ghi theo id
 	public Model getById(int id) {
 		return entityManager.find(clazz(), id);
 	}
-	
-	//Lay tat ca cac ban ghi trong mot table
+
+	// Lay tat ca cac ban ghi trong mot table
 	@SuppressWarnings("unchecked")
 	public List<Model> findAll() {
 		Table table = clazz().getAnnotation(Table.class);
-		return (List<Model>) entityManager.createNativeQuery(
-				"SELECT * FROM " + table.name(), 
-				clazz()).getResultList();
+		return (List<Model>) entityManager.createNativeQuery("SELECT * FROM " + table.name(), clazz()).getResultList();
 	}
-	
-	//Them moi hoac sua mot ban ghi
+
+	// Them moi hoac sua mot ban ghi
 	@Transactional
 	public Model saveOrUpdate(Model entity) {
-		if (entity.getId() == null || entity.getId() <= 0) { //Add new entity
+		if (entity.getId() == null || entity.getId() <= 0) { // Add new entity
 			entityManager.persist(entity);
 			return entity;
-		}
-		else { //update entity
+		} else { // update entity
 			return entityManager.merge(entity);
 		}
 	}
-	
-	//Xoa 1 ban ghi theo entity
+
+	// Xoa 1 ban ghi theo entity
 	@Transactional
 	public void delete(Model entity) {
-		entityManager.remove(entity);	
+		entityManager.remove(entity);
 	}
-	//Delete theo id
+
+	// Delete theo id
 	@Transactional
 	public void deleteById(int id) {
 		Model entity = this.getById(id);
 		delete(entity);
 	}
-	
-	// chuyên thực hiện các câu lệnh sqp tự thự thi nó se trả về 1 list 
+
+	// chuyên thực hiện các câu lệnh sqp tự thự thi nó se trả về 1 list
 	@SuppressWarnings("unchecked")
-	public List<Model> excuteNativeSql(String sql){
+	public List<Model> excuteNativeSql(String sql) {
 		try {
 			Query query = entityManager.createNativeQuery(sql, clazz());
 			return query.getResultList();
@@ -70,7 +68,20 @@ public abstract class BaseService <Model extends BaseModel> {
 			return null;
 		}
 	}
-	
-	
-	
+
+	@SuppressWarnings("unchecked")
+	public Model getEntityByNativeSQL(String sql) {
+		try {
+			Query query = entityManager.createNativeQuery(sql, clazz());
+			List<Model> list = query.getResultList();
+			if (list != null && list.size() > 0) {
+				return list.get(0);
+			}
+			return null;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 }
